@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+	 <class name="com.learn.hibernate.Category" table="category" >
+        <id name="categoryId" type="java.lang.Integer">
+            <column name="CATEGORY_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string" column="NAME" />
+        <property name="desc" type="string" column="DESCRPTION"/>
+ 		
+ 		<!--  Many to Many Mapping needed in both configs -->
+         <set name="stocks" table="stock_category" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CATEGORY_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.learn.hibernate.Stock">
+                <column name="STOCK_ID" not-null="true" />
+            </many-to-many>
+        </set>
+        </class>
+</hibernate-mapping>
+
+

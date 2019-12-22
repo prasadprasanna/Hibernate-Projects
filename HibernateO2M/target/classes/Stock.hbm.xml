@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+	<class name="com.learn.hibernate.Stock" table="stock" >
+		<id name="stockId" type="java.lang.Integer">
+			<column name="STOCK_ID" />
+			<generator class="identity" />
+		</id>
+		
+		<!-- Addition config for column can be added in Property -->
+		<property name="stockCode" type="string">
+			<column name="STOCK_CODE" length="10" not-null="true" unique="true" />
+		</property>
+		<property name="stockName" type="string" column="STOCK_NAME"/>
+			
+		
+		<!-- One to Many Mapping Config -->
+		<set name="stockDailyRecords" table="stock_daily_record" 
+			cascade="all" lazy="true" fetch="select">
+            <key>
+                <column name="STOCK_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.learn.hibernate.StockDailyRecord" />
+        </set>
+	</class>
+</hibernate-mapping>
+
+
+ 
+<!-- 
+	create table EMPLOYEE (
+	   id INT NOT NULL auto_increment,
+	   first_name VARCHAR(20) default NULL,
+	   last_name  VARCHAR(20) default NULL,
+	   salary     INT  default NULL,
+	   PRIMARY KEY (id)
+);
+
+ -->

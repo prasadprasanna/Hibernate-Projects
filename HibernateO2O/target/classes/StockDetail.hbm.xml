@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+<class name="com.h2k.hibernate.StockDetail" table="stock_detail">
+		
+		<id name="stockId" type="java.lang.Integer">
+			<column name="STOCK_ID" />
+			<generator class="foreign" >
+				<param name="property">stock</param>
+			</generator>
+		</id>
+	
+		<property name="compName" type="string">
+			<column name="COMP_NAME" length="100" not-null="true" />
+		</property>
+		<property name="compDesc" type="string">
+			<column name="COMP_DESC" not-null="true" />
+		</property>
+		<property name="remark" type="string">
+			<column name="REMARK" not-null="true" />
+		</property>
+		<property name="listedDate" type="date">
+			<column name="LISTED_DATE" length="10" not-null="true" />
+		</property>
+		
+		<one-to-one name="stock" class="com.h2k.hibernate.Stock" constrained="true" />
+	
+		
+	</class>
+</hibernate-mapping>
+
+
+ 
+<!-- 
+	create table EMPLOYEE (
+	   id INT NOT NULL auto_increment,
+	   first_name VARCHAR(20) default NULL,
+	   last_name  VARCHAR(20) default NULL,
+	   salary     INT  default NULL,
+	   PRIMARY KEY (id)
+);
+
+ -->
